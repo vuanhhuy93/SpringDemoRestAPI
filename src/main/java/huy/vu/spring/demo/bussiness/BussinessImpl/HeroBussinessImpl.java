@@ -4,6 +4,8 @@ import huy.vu.spring.demo.Entity.Hero;
 import huy.vu.spring.demo.Request.CreateHeroRequest;
 import huy.vu.spring.demo.Request.UpdateHeroRequest;
 import huy.vu.spring.demo.Response.CreateHeroResponse;
+import huy.vu.spring.demo.Response.FindHeroResponse;
+import huy.vu.spring.demo.Response.ListHeroResponse;
 import huy.vu.spring.demo.Response.MainResponse;
 import huy.vu.spring.demo.Service.HeroService;
 import huy.vu.spring.demo.bussiness.HeroBussiness;
@@ -11,6 +13,8 @@ import huy.vu.spring.demo.convert.HeroConvert;
 import huy.vu.spring.demo.enums.BussinessExceptionEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HeroBussinessImpl implements HeroBussiness {
@@ -33,22 +37,42 @@ public class HeroBussinessImpl implements HeroBussiness {
     @Override
     public MainResponse updateHero(UpdateHeroRequest request) throws Exception {
 
-        return null;
+        Hero hero = heroService.findById(request.getHeroId());
+        HeroConvert.convertUpdate(request, hero);
+        heroService.updateHero(hero);
+        MainResponse response = new MainResponse();
+        buildSuccess(response);
+        return response;
     }
 
     @Override
     public MainResponse listHero() throws Exception {
-        return null;
+        List<Hero> heroes = heroService.findAll();
+        MainResponse response = new MainResponse();
+        buildSuccess(response);
+        ListHeroResponse data = new ListHeroResponse();
+        data.setHeroes(heroes);
+        response.setData(data);
+        return response;
     }
 
     @Override
     public MainResponse findHeroById(Long id) throws Exception {
-        return null;
+        Hero hero = heroService.findById(id);
+        MainResponse response = new MainResponse();
+        buildSuccess(response);
+        FindHeroResponse data = new FindHeroResponse();
+        data.setHero(hero);
+        return response;
     }
 
     @Override
     public MainResponse deleteHero(Long id) throws Exception {
-        return null;
+        Hero hero = heroService.findById(id);
+        heroService.deleteHero(hero);
+        MainResponse response = new MainResponse();
+        buildSuccess(response);
+        return response;
     }
 
     private void buildSuccess(MainResponse response){

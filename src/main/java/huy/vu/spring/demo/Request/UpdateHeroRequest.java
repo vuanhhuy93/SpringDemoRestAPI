@@ -18,4 +18,5 @@ public class UpdateHeroRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String gender;
+    private String descriptiton;
 }

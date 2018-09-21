@@ -17,4 +17,6 @@ public class CreateHeroRequest {
     private Date birthday;
     @Valid
     private String gender;
+
+    private String description;
 }

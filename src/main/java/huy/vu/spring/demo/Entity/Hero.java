@@ -12,8 +12,6 @@ import java.util.Date;
 @Table(name = "tbl_hero")
 @AttributeOverride(name = "id", column = @Column(name = "id_hero"))
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Hero extends BaseEntity{
     private String heroName;
 
@@ -27,7 +25,6 @@ public class Hero extends BaseEntity{
 
     @Column(name = "description")
     private String description;
-
 
     public Hero(String name, Date date, String sex){
         this.heroName = name;

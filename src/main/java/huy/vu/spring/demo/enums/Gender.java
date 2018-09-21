@@ -11,7 +11,7 @@ public enum Gender {
     }
     public static Gender getValueByCode(String code){
         for (Gender gender : Gender.values()){
-            if (gender.getValue().equals(code)){
+            if (gender.getCode().equals(code)){
                 return gender;
             }
         }
@@ -19,6 +19,10 @@ public enum Gender {
     }
     public String getValue() {
         return value;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public void setValue(String value) {
