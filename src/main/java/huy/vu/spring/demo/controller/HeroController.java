@@ -4,6 +4,9 @@ import huy.vu.spring.demo.Request.CreateHeroRequest;
 import huy.vu.spring.demo.Request.UpdateHeroRequest;
 import huy.vu.spring.demo.Response.MainResponse;
 import huy.vu.spring.demo.bussiness.HeroBussiness;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +15,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1")
 public class HeroController extends BaseController{
+
     @Autowired
     HeroBussiness heroBussiness;
+
+    private static final Logger log = LogManager.getLogger(HeroController.class);
 
 
     @RequestMapping(value = "/hero", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MainResponse> createHero(@RequestBody CreateHeroRequest request) throws Exception{
+        log.info(request.getName());
         return returnSuccess(heroBussiness.createHero(request));
     }
 

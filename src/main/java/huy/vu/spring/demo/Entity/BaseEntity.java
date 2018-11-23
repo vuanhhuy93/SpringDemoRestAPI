@@ -27,15 +27,7 @@ public class BaseEntity implements Serializable {
             updatable = false
     )
     private Date creationDate;
-    @Basic(
-            optional = true
-    )
-    @Column(
-            name = "CREATOR_ID",
-            nullable = true,
-            updatable = false
-    )
-    private Long creator;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Basic(
             optional = true
